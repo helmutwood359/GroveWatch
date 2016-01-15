@@ -12,3 +12,18 @@
 //	grovewatch verify <snapshot.json>
 //	grovewatch version
 package main
+
+import (
+	"encoding/json"
+	"flag"
+	"fmt"
+	"os"
+	"strings"
+
+	"github.com/grovewatch/grovewatch/internal/provenance"
+)
+
+// version is the tool version stamped into snapshots. Overridable at build
+// time via -ldflags "-X main.version=...".
+var version = "0.1.0"
+
