@@ -27,3 +27,17 @@ import (
 // time via -ldflags "-X main.version=...".
 var version = "0.1.0"
 
+func main() {
+	if len(os.Args) < 2 {
+		usage(os.Stderr)
+		os.Exit(2)
+	}
+	sub := os.Args[1]
+	args := os.Args[2:]
+
+	var err error
+	switch sub {
+	case "scan":
+		err = runScan(args)
+	case "diff":
+		err = runDiff(args)
