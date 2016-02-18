@@ -5,3 +5,10 @@
   inputs; the trunk is the deterministic digest build; the canopy is the emitted
   provenance snapshot. Signal pulses travel up the paths from roots to canopy.</desc>
 
+  <defs>
+    <linearGradient id="pt-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04140d"/>
+      <stop offset="0.55" stop-color="#06231a"/>
+      <stop offset="1" stop-color="#03170f"/>
+    </linearGradient>
+    <linearGradient id="pt-trunk" x1="0" y1="1" x2="0" y2="0">
