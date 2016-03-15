@@ -6,3 +6,12 @@ implementing a compatible producer or consumer.
 
 ## Goals
 
+1. **Deterministic.** Two scans of identical inputs produce an identical
+   canonical digest, regardless of filesystem traversal order or capture time.
+2. **Tamper-evident.** A snapshot carries a self-describing digest so any later
+   modification is detectable with `grovewatch verify`.
+3. **Secret-safe.** Environment values are hashed, never stored verbatim.
+4. **Explainable.** Two snapshots can be diffed into a per-input list of
+   added / modified / removed changes.
+
+## Schema
