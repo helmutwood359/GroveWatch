@@ -15,3 +15,12 @@ implementing a compatible producer or consumer.
    added / modified / removed changes.
 
 ## Schema
+
+The on-disk format is JSON. `schema` carries a SemVer string (currently
+`1.0.0`); consumers should reject or adapt to unknown major versions.
+
+```
+Snapshot
+├─ schema        string            format version
+├─ tool          { name, version } producer identity
+├─ workspace
