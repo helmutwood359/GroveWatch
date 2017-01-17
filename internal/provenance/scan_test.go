@@ -12,3 +12,11 @@ import (
 func writeTree(t *testing.T) string {
 	t.Helper()
 	root := t.TempDir()
+	files := map[string]string{
+		"README.md":           "# demo\n",
+		"src/main.go":         "package main\nfunc main() {}\n",
+		"src/util/helper.go":  "package util\n",
+		"node_modules/dep.js": "// should be ignored\n",
+	}
+	for rel, content := range files {
+		full := filepath.Join(root, filepath.FromSlash(rel))
