@@ -5,3 +5,6 @@
 
 BIN        := bin/grovewatch
 PKG        := ./...
+SAMPLE_WS  := examples/sample-workspace
+REPORT     := examples/report/provenance.json
+VERSION    := 0.1.0
