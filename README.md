@@ -35,3 +35,40 @@ the same thing, and if not, **what changed?**
 
 ## Trail map
 
+- [What grovewatch is (and is not)](#what-grovewatch-is-and-is-not)
+- [The three roots: what gets captured](#the-three-roots-what-gets-captured)
+- [The trunk: digests, Merkle root, determinism](#the-trunk-digests-merkle-root-determinism)
+- [Install & build](#install--build)
+- [Three journeys: scan → verify → diff](#three-journeys-scan--verify--diff)
+- [CLI reference](#cli-reference)
+- [The snapshot schema, field by field](#the-snapshot-schema-field-by-field)
+- [Reading a drift report](#reading-a-drift-report)
+- [The viewer](#the-viewer)
+- [Use cases](#use-cases)
+- [Recipes](#recipes)
+- [Trust boundary & threat model](#trust-boundary--threat-model)
+- [Troubleshooting](#troubleshooting)
+- [Repository layout](#repository-layout)
+- [Testing](#testing)
+- [Limitations](#limitations)
+- [Roadmap](#roadmap)
+- [Further reading](#further-reading)
+
+---
+
+## What grovewatch is (and is not)
+
+**It is** a small, auditable tool that answers one question well: a `scan`
+produces a portable JSON record of *inputs*, a `verify` proves that record was
+not edited since, a `diff` explains the difference between two records in plain,
+category-grouped language, and a browser `viewer` renders any record with no
+build step or network call.
+
+**It is not** a runtime tracer. grovewatch does **not** hook syscalls, use eBPF,
+or observe processes as they execute. It reads the filesystem, resolves tool
+names on `PATH`, runs `<tool> --version`, and reads a fixed list of
+environment-variable *keys* — everything it knows, it learned by looking, never
+by intercepting. If you need process/syscall provenance, this is the wrong tool;
+if you need reproducible-input fingerprints you can diff and verify, it is the
+right size.
+
