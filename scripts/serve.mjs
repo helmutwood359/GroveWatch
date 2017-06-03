@@ -7,3 +7,8 @@
  * Then open http://localhost:<port>/viewer/public/index.html
  */
 
+import { createServer } from "node:http";
+import { readFile, stat } from "node:fs/promises";
+import { extname, join, normalize, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
