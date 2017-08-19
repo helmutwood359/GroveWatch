@@ -6,3 +6,11 @@
 
 import type { Snapshot, TreeNode } from "./types.js";
 import {
+  buildTree,
+  countFoundTools,
+  countSetEnv,
+  formatBytes,
+  formatTimestamp,
+  shortDigest,
+} from "./format.js";
+
