@@ -6,3 +6,7 @@
 
 export interface ToolInfo {
   name: string;
+  version: string;
+}
+
+export interface WorkspaceInfo {
