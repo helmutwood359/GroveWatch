@@ -31,3 +31,11 @@ export function render(container: HTMLElement, snap: Snapshot): void {
   container.replaceChildren(
     renderHeader(snap),
     renderStats(snap),
+    renderSection("Files", renderFileTree(snap)),
+    renderSection("Toolchain", renderTools(snap)),
+    renderSection("Environment", renderEnv(snap)),
+  );
+}
+
+function renderHeader(snap: Snapshot): HTMLElement {
+  const header = el("header", "gw-header");
