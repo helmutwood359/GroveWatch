@@ -22,3 +22,8 @@ type Snapshot struct {
 	Workspace WorkspaceInfo `json:"workspace"`
 	// Files are the recorded file inputs, sorted by path for determinism.
 	Files []FileRecord `json:"files"`
+	// Tools are the recorded external toolchain inputs, sorted by name.
+	Tools []ToolRecord `json:"tools"`
+	// Environment are the recorded environment variable inputs, sorted by key.
+	Environment []EnvRecord `json:"environment"`
+	// Digest is the SHA-256 over the canonical content of this snapshot
