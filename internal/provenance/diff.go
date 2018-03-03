@@ -64,3 +64,19 @@ func Compare(oldSnap, newSnap *Snapshot) *Diff {
 
 func diffFiles(oldFiles, newFiles []FileRecord) []Change {
 	oldByPath := make(map[string]FileRecord, len(oldFiles))
+	for _, f := range oldFiles {
+		oldByPath[f.Path] = f
+	}
+	newByPath := make(map[string]FileRecord, len(newFiles))
+	for _, f := range newFiles {
+		newByPath[f.Path] = f
+	}
+
+	var changes []Change
+	for _, nf := range newFiles {
+		of, ok := oldByPath[nf.Path]
+		if !ok {
+			changes = append(changes, Change{
+				Category: FileCategory,
+				Kind:     Added,
+				Name:     nf.Path,
