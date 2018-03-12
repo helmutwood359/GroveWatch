@@ -21,3 +21,15 @@ type ScanConfig struct {
 	// Ignore holds path fragments; any file whose relative path contains one
 	// of these fragments is skipped. Matching is done on slash-separated
 	// segments (e.g. ".git", "node_modules", "dist").
+	Ignore []string
+	// Tools lists external tool names to probe on PATH (e.g. "go", "node").
+	Tools []string
+	// EnvKeys lists environment variable names whose presence and value hash
+	// are recorded.
+	EnvKeys []string
+	// Now returns the snapshot timestamp; injectable for testing. If nil,
+	// time.Now is used.
+	Now func() time.Time
+}
+
+// versionRe extracts the first dotted version number from a tool's output.
