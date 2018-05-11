@@ -21,3 +21,15 @@ func TestCompareIdentical(t *testing.T) {
 	files := []FileRecord{{Path: "a.txt", Size: 1, Mode: "0644", Digest: "aa"}}
 	a := mkSnap(files, nil, nil)
 	b := mkSnap(files, nil, nil)
+	d := Compare(a, b)
+	if !d.Identical {
+		t.Fatalf("expected identical, got changes: %+v", d.Changes)
+	}
+	if len(d.Changes) != 0 {
+		t.Fatalf("expected no changes, got %d", len(d.Changes))
+	}
+}
+
+func TestCompareFileDrift(t *testing.T) {
+	oldSnap := mkSnap([]FileRecord{
+		{Path: "keep.txt", Size: 1, Mode: "0644", Digest: "k1"},
