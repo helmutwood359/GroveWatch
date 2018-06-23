@@ -39,3 +39,12 @@ export function render(container: HTMLElement, snap: Snapshot): void {
 
 function renderHeader(snap: Snapshot): HTMLElement {
   const header = el("header", "gw-header");
+  header.append(
+    el("h1", "gw-title", "grovewatch provenance"),
+    el("p", "gw-sub", `${snap.tool.name} v${snap.tool.version} · schema ${snap.schema}`),
+  );
+  const digest = el("div", "gw-digest");
+  digest.append(
+    el("span", "gw-label", "digest "),
+    el("code", "gw-mono", snap.digest),
+  );
