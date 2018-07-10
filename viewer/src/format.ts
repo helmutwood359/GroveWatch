@@ -18,3 +18,13 @@ export function formatBytes(bytes: number): string {
   }
   return `${value.toFixed(1)} ${units[unit]}`;
 }
+
+/** Returns the first `n` characters of a hex digest for compact display. */
+export function shortDigest(digest: string, n = 12): string {
+  if (!digest) return "—";
+  return digest.length <= n ? digest : digest.slice(0, n);
+}
+
+/** Formats an ISO timestamp into a locale string, tolerating bad input. */
+export function formatTimestamp(iso: string): string {
+  const d = new Date(iso);
