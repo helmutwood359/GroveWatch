@@ -80,3 +80,20 @@ func diffFiles(oldFiles, newFiles []FileRecord) []Change {
 				Category: FileCategory,
 				Kind:     Added,
 				Name:     nf.Path,
+				Detail:   fmt.Sprintf("new file (%d bytes, digest %s)", nf.Size, short(nf.Digest)),
+			})
+			continue
+		}
+		if of.Digest != nf.Digest {
+			changes = append(changes, Change{
+				Category: FileCategory,
+				Kind:     Modified,
+				Name:     nf.Path,
+				Detail:   fmt.Sprintf("content changed %s -> %s (%d -> %d bytes)", short(of.Digest), short(nf.Digest), of.Size, nf.Size),
+			})
+		} else if of.Mode != nf.Mode {
+			changes = append(changes, Change{
+				Category: FileCategory,
+				Kind:     Modified,
+				Name:     nf.Path,
+				Detail:   fmt.Sprintf("mode changed %s -> %s", of.Mode, nf.Mode),
