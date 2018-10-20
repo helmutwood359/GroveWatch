@@ -5,3 +5,7 @@
  * in this order:
  *   1. a `?report=<url>` query parameter, if present;
  *   2. a `<script id="gw-report" type="application/json">` inline block, which
+ *      lets the viewer work from the local filesystem without a server;
+ *   3. the default `./provenance.json` fetched relative to the page.
+ */
+
