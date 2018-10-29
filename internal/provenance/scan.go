@@ -33,3 +33,15 @@ type ScanConfig struct {
 }
 
 // versionRe extracts the first dotted version number from a tool's output.
+var versionRe = regexp.MustCompile(`\d+\.\d+(?:\.\d+)?`)
+
+// Scan walks the configured workspace and returns a deterministic snapshot.
+// The returned snapshot's Digest depends only on inputs, not on wall-clock
+// time or filesystem traversal order.
+func Scan(cfg ScanConfig) (*Snapshot, error) {
+	if cfg.Root == "" {
+		return nil, fmt.Errorf("scan: root must not be empty")
+	}
+	nowFn := cfg.Now
+	if nowFn == nil {
+		nowFn = time.Now
