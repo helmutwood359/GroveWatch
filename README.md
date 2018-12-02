@@ -109,3 +109,41 @@ for f in sort_by_path(files):
 merkle_root = hex(h)
 ```
 
+It changes if *any* file is added, removed, renamed, or edited — a fast "did the
+file set move at all?" check.
+
+**3 · Canonical snapshot digest** — the snapshot's identity is a SHA-256 over a
+*canonical view* that deliberately excludes the volatile `created_at` **and the
+digest field itself**:
+
+```
+view   = { schema, tool, workspace, files, tools, environment }
+digest = hex( SHA-256( json_marshal(view) ) )
+```
+
+Every collection is pre-sorted (files by path, tools by name, env by key) and
+Go's `encoding/json` emits struct fields in declaration order, so the serialized
+view is byte-stable. **Identical inputs therefore yield an identical digest —
+across machines and across time.** That is the point of the trunk: strip the
+noise (when, on what host) and hash only what feeds the build.
+
+> Full specification: **[docs/PROVENANCE.md](docs/PROVENANCE.md)**.
+
+---
+
+## Install & build
+
+Requirements: **Go ≥ 1.24** for the CLI; **Node ≥ 18** + **TypeScript ≥ 5** for
+the viewer (dev only — the shipped viewer has no runtime deps).
+
+```sh
+make build      # compile the CLI to bin/grovewatch
+make viewer     # type-check, build, and test the viewer
+make ci         # everything CI runs: vet + tests + viewer + verify sample
+```
+
+Or directly: `go build -o bin/grovewatch ./cmd/grovewatch`, and in `viewer/`,
+`npx tsc -p tsconfig.json && node --test`. Run `make help` to list all targets.
+
+---
+
