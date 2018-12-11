@@ -64,3 +64,12 @@ function renderStats(snap: Snapshot): HTMLElement {
   ];
   for (const [label, value] of stats) {
     const card = el("div", "gw-stat");
+    card.append(el("div", "gw-stat-value", value), el("div", "gw-stat-label", label));
+    grid.append(card);
+  }
+  return grid;
+}
+
+function renderSection(title: string, body: HTMLElement): HTMLElement {
+  const section = el("section", "gw-section");
+  section.append(el("h2", "gw-section-title", title), body);
