@@ -9,3 +9,6 @@
  *   3. the default `./provenance.json` fetched relative to the page.
  */
 
+import type { Snapshot } from "./types.js";
+import { render, renderError } from "./render.js";
+
