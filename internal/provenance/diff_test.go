@@ -44,3 +44,15 @@ func TestCompareFileDrift(t *testing.T) {
 
 	d := Compare(oldSnap, newSnap)
 	if d.Identical {
+		t.Fatal("expected drift")
+	}
+
+	got := map[string]ChangeKind{}
+	for _, c := range d.Changes {
+		if c.Category != FileCategory {
+			t.Errorf("unexpected category %s", c.Category)
+		}
+		got[c.Name] = c.Kind
+	}
+	checks := map[string]ChangeKind{
+		"added.txt":   Added,
