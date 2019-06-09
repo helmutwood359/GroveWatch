@@ -147,3 +147,40 @@ Or directly: `go build -o bin/grovewatch ./cmd/grovewatch`, and in `viewer/`,
 
 ---
 
+## Three journeys: scan → verify → diff
+
+### Journey 1 — scan the grove
+
+Walk the bundled sample workspace and write a snapshot. The summary line goes to
+stderr; the snapshot goes to the file (or stdout without `-out`):
+
+```console
+$ grovewatch scan -out examples/report/provenance.json examples/sample-workspace
+wrote examples/report/provenance.json (4 files, digest b8afd4eb68c2)
+```
+
+### Journey 2 — verify the seal
+
+`verify` recomputes the canonical digest and compares it to the one stored in the
+file, so a single edited byte breaks the seal (exit `4`):
+
+```console
+$ grovewatch verify examples/report/provenance.json
+OK: digest b8afd4eb68c2 matches content
+
+$ grovewatch verify tampered.json
+MISMATCH: stored b8afd4eb68c2 but content hashes to 41c9a7de0b52
+```
+
+### Journey 3 — diff the drift
+
+Change some inputs, scan again, and compare against the baseline. `diff` groups
+changes by category (files → tools → env) and sorts them for a stable report:
+
+```console
+$ echo "// new feature" >> workspace/main.go
+$ rm workspace/config.json
+$ echo "console.log('new');" > workspace/web/new.js
+$ grovewatch scan -out new.json workspace
+$ grovewatch diff examples/report/provenance.json new.json
+Drift detected: 1 added, 1 modified, 1 removed.
