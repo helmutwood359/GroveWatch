@@ -32,3 +32,8 @@ type Snapshot struct {
 	Digest string `json:"digest"`
 	// CreatedAt is the wall-clock time the snapshot was produced. It is
 	// intentionally excluded from Digest so that identical inputs yield an
+	// identical Digest across runs.
+	CreatedAt time.Time `json:"created_at"`
+}
+
+// ToolInfo identifies the grovewatch producer.
