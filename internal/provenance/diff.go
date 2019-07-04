@@ -97,3 +97,19 @@ func diffFiles(oldFiles, newFiles []FileRecord) []Change {
 				Kind:     Modified,
 				Name:     nf.Path,
 				Detail:   fmt.Sprintf("mode changed %s -> %s", of.Mode, nf.Mode),
+			})
+		}
+	}
+	for _, of := range oldFiles {
+		if _, ok := newByPath[of.Path]; !ok {
+			changes = append(changes, Change{
+				Category: FileCategory,
+				Kind:     Removed,
+				Name:     of.Path,
+				Detail:   fmt.Sprintf("file removed (was %d bytes)", of.Size),
+			})
+		}
+	}
+	sortChanges(changes)
+	return changes
+}
