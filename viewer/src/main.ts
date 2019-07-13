@@ -16,3 +16,7 @@ const DEFAULT_REPORT_URL = "./provenance.json";
 
 /** Reads an inline JSON report embedded in the page, if present. */
 function readInlineReport(): Snapshot | null {
+  const tag = document.getElementById("gw-report");
+  if (!tag || !tag.textContent || tag.textContent.trim().length === 0) {
+    return null;
+  }
