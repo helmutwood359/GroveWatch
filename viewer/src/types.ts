@@ -14,3 +14,7 @@ export interface WorkspaceInfo {
   file_count: number;
   total_bytes: number;
   merkle_root: string;
+}
+
+export interface FileRecord {
+  path: string;
