@@ -10,3 +10,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  buildTree,
+  countFoundTools,
+  countSetEnv,
+  formatBytes,
+  formatTimestamp,
