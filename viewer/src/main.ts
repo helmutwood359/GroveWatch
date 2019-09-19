@@ -20,3 +20,7 @@ function readInlineReport(): Snapshot | null {
   if (!tag || !tag.textContent || tag.textContent.trim().length === 0) {
     return null;
   }
+  return JSON.parse(tag.textContent) as Snapshot;
+}
+
+/** Fetches a report from a URL. */
