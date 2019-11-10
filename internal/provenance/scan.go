@@ -57,3 +57,15 @@ func Scan(cfg ScanConfig) (*Snapshot, error) {
 	}
 	if !info.IsDir() {
 		return nil, fmt.Errorf("scan: root %q is not a directory", root)
+	}
+
+	files, err := scanFiles(root, cfg.Ignore)
+	if err != nil {
+		return nil, err
+	}
+	tools := scanTools(cfg.Tools)
+	env := scanEnv(cfg.EnvKeys)
+
+	var totalBytes int64
+	for _, f := range files {
+		totalBytes += f.Size
