@@ -37,3 +37,8 @@ type Snapshot struct {
 }
 
 // ToolInfo identifies the grovewatch producer.
+type ToolInfo struct {
+	Name    string `json:"name"`
+	Version string `json:"version"`
+}
+
