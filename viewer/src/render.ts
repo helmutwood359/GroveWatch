@@ -73,3 +73,11 @@ function renderStats(snap: Snapshot): HTMLElement {
 function renderSection(title: string, body: HTMLElement): HTMLElement {
   const section = el("section", "gw-section");
   section.append(el("h2", "gw-section-title", title), body);
+  return section;
+}
+
+function renderFileTree(snap: Snapshot): HTMLElement {
+  const tree = buildTree(snap.files);
+  const list = el("ul", "gw-tree");
+  for (const child of tree.children) {
+    list.append(renderTreeNode(child));
