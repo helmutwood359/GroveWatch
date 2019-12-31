@@ -35,3 +35,10 @@ func fixedNow() time.Time {
 }
 
 func TestScanRecordsFilesAndIgnores(t *testing.T) {
+	root := writeTree(t)
+	snap, err := Scan(ScanConfig{
+		Root:        root,
+		ToolVersion: "test",
+		Ignore:      []string{"node_modules"},
+		Now:         fixedNow,
+	})
