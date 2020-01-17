@@ -69,3 +69,15 @@ func Scan(cfg ScanConfig) (*Snapshot, error) {
 	var totalBytes int64
 	for _, f := range files {
 		totalBytes += f.Size
+	}
+
+	snap := &Snapshot{
+		Schema: SchemaVersion,
+		Tool: ToolInfo{
+			Name:    "grovewatch",
+			Version: cfg.ToolVersion,
+		},
+		Workspace: WorkspaceInfo{
+			Root:       filepath.ToSlash(cfg.Root),
+			FileCount:  len(files),
+			TotalBytes: totalBytes,
