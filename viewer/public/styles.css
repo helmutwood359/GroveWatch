@@ -31,3 +31,20 @@ body {
 
 .gw-header {
   border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gw-title {
+  margin: 0;
+  font-size: 1.75rem;
+  letter-spacing: -0.01em;
+}
+
+.gw-sub {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--muted);
+}
+
+.gw-digest {
+  font-size: 0.85rem;
