@@ -42,3 +42,10 @@ func TestScanRecordsFilesAndIgnores(t *testing.T) {
 		Ignore:      []string{"node_modules"},
 		Now:         fixedNow,
 	})
+	if err != nil {
+		t.Fatalf("scan: %v", err)
+	}
+
+	if snap.Workspace.FileCount != 3 {
+		t.Fatalf("expected 3 files, got %d: %+v", snap.Workspace.FileCount, snap.Files)
+	}
