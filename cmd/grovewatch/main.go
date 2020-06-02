@@ -41,3 +41,18 @@ func main() {
 		err = runScan(args)
 	case "diff":
 		err = runDiff(args)
+	case "verify":
+		err = runVerify(args)
+	case "version", "--version", "-version":
+		fmt.Printf("grovewatch %s\n", version)
+	case "help", "-h", "--help":
+		usage(os.Stdout)
+	default:
+		fmt.Fprintf(os.Stderr, "grovewatch: unknown command %q\n\n", sub)
+		usage(os.Stderr)
+		os.Exit(2)
+	}
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "grovewatch: %v\n", err)
+		os.Exit(1)
