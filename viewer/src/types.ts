@@ -18,3 +18,7 @@ export interface WorkspaceInfo {
 
 export interface FileRecord {
   path: string;
+  size: number;
+  mode: string;
+  digest: string;
+}
