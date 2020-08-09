@@ -21,3 +21,6 @@ func hashFile(path string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	defer f.Close()
+
+	h := sha256.New()
