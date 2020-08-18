@@ -27,3 +27,7 @@ function readInlineReport(): Snapshot | null {
 async function fetchReport(url: string): Promise<Snapshot> {
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
+    throw new Error(`HTTP ${res.status} while fetching ${url}`);
+  }
+  return (await res.json()) as Snapshot;
+}
