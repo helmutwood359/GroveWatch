@@ -68,3 +68,15 @@ func TestCompareFileDrift(t *testing.T) {
 		t.Error("unchanged file should not appear in diff")
 	}
 }
+
+func TestCompareToolAndEnvDrift(t *testing.T) {
+	oldSnap := mkSnap(nil,
+		[]ToolRecord{{Name: "go", Found: true, Version: "1.24"}},
+		[]EnvRecord{{Key: "CI", Set: true, ValueDigest: "x1"}},
+	)
+	newSnap := mkSnap(nil,
+		[]ToolRecord{{Name: "go", Found: true, Version: "1.25"}},
+		[]EnvRecord{{Key: "CI", Set: true, ValueDigest: "x2"}},
+	)
+	d := Compare(oldSnap, newSnap)
+
