@@ -15,3 +15,7 @@ import {
   countSetEnv,
   formatBytes,
   formatTimestamp,
+  shortDigest,
+} from "../dist/format.js";
+
+test("formatBytes scales units", () => {
