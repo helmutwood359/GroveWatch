@@ -19,3 +19,7 @@ import {
 } from "../dist/format.js";
 
 test("formatBytes scales units", () => {
+  assert.equal(formatBytes(0), "0 B");
+  assert.equal(formatBytes(512), "512 B");
+  assert.equal(formatBytes(1024), "1.0 KB");
+  assert.equal(formatBytes(1536), "1.5 KB");
