@@ -221,3 +221,40 @@ grovewatch version                      Print the version
 
 **`diff` flag** — `-json` emits the diff as structured JSON instead of text.
 
+**Exit codes** — `0` success / no drift · `1` I/O or parse error · `2` usage
+error · `3` `diff` found drift · `4` `verify` digest mismatch. Codes `3` and `4`
+are the ones you wire into CI gates.
+
+---
+
+## The snapshot schema, field by field
+
+A snapshot is a single JSON object. Abridged from the bundled sample:
+
+```json
+{
+  "schema": "1.0.0",
+  "tool": { "name": "grovewatch", "version": "0.1.0" },
+  "workspace": { "root": "examples/sample-workspace", "file_count": 4,
+                 "total_bytes": 825, "merkle_root": "5be5329bef2c…247e" },
+  "files":       [ { "path": "README.md", "size": 298, "mode": "0666", "digest": "45fef498…0f95" } ],
+  "tools":       [ { "name": "go", "path": "…/go.exe", "version": "1.24.4", "found": true } ],
+  "environment": [ { "key": "CI", "value_digest": "", "set": false } ],
+  "digest": "b8afd4eb68c2…689d",
+  "created_at": "2026-08-31T16:17:09Z"
+}
+```
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `schema` | SemVer | Currently `1.0.0`; gate on the major version |
+| `tool` | `{name, version}` | Producer identity |
+| `workspace` | object | `root`, `file_count`, `total_bytes`, `merkle_root` (hex) |
+| `files[]` | `{path, size, mode, digest}` | Sorted by path; `path` always uses `/` |
+| `tools[]` | `{name, path, version, found}` | Sorted by name |
+| `environment[]` | `{key, value_digest, set}` | Sorted by key; value never stored |
+| `digest` | hex | Canonical identity (excludes `created_at` and itself) |
+| `created_at` | RFC 3339 UTC | **Volatile** — excluded from the digest |
+
+Paths are normalised to forward slashes even on Windows, so a snapshot from one
+OS is comparable to one from another.
