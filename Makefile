@@ -26,3 +26,6 @@ build: ## Compile the grovewatch CLI to bin/
 	go build -ldflags "-X main.version=$(VERSION)" -o $(BIN) ./cmd/grovewatch
 
 test: ## Run Go tests
+	go test $(PKG)
+
+vet: ## Run go vet
