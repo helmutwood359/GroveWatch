@@ -81,3 +81,15 @@ func Scan(cfg ScanConfig) (*Snapshot, error) {
 			Root:       filepath.ToSlash(cfg.Root),
 			FileCount:  len(files),
 			TotalBytes: totalBytes,
+			MerkleRoot: merkleRoot(files),
+		},
+		Files:       files,
+		Tools:       tools,
+		Environment: env,
+		CreatedAt:   nowFn().UTC(),
+	}
+	snap.Digest = ComputeDigest(snap)
+	return snap, nil
+}
+
+// scanFiles walks root recursively and records every regular file that is not
