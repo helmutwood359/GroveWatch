@@ -22,3 +22,8 @@ export interface FileRecord {
   mode: string;
   digest: string;
 }
+
+export interface ToolRecord {
+  name: string;
+  path: string;
+  version: string;
