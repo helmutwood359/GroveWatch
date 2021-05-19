@@ -28,3 +28,6 @@ func hashFile(path string) (string, error) {
 		return "", err
 	}
 	return hex.EncodeToString(h.Sum(nil)), nil
+}
+
+// merkleRoot folds a set of file records into a single hash. The records are
