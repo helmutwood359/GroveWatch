@@ -7,3 +7,6 @@ on:
 
 jobs:
   go:
+    name: Go (build, vet, test)
+    runs-on: ubuntu-latest
+    steps:
