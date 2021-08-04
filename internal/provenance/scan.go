@@ -93,3 +93,15 @@ func Scan(cfg ScanConfig) (*Snapshot, error) {
 }
 
 // scanFiles walks root recursively and records every regular file that is not
+// filtered by the ignore list. Results are sorted by path.
+func scanFiles(root string, ignore []string) ([]FileRecord, error) {
+	var records []FileRecord
+
+	err := filepath.WalkDir(root, func(path string, d fs.DirEntry, walkErr error) error {
+		if walkErr != nil {
+			return walkErr
+		}
+		rel, err := filepath.Rel(root, path)
+		if err != nil {
+			return err
+		}
