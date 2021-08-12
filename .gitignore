@@ -4,3 +4,4 @@
 *.test
 *.out
 
+# grovewatch snapshots produced by local runs (the curated sample is tracked)
