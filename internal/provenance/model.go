@@ -51,3 +51,8 @@ type WorkspaceInfo struct {
 	// TotalBytes is the sum of recorded file sizes.
 	TotalBytes int64 `json:"total_bytes"`
 	// MerkleRoot is a hash over all file digests, giving a single value that
+	// changes if any file content changes.
+	MerkleRoot string `json:"merkle_root"`
+}
+
+// FileRecord is the provenance of a single file input.
