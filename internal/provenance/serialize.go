@@ -35,3 +35,10 @@ func Read(r io.Reader) (*Snapshot, error) {
 	data, err := io.ReadAll(r)
 	if err != nil {
 		return nil, fmt.Errorf("read snapshot: %w", err)
+	}
+	return Unmarshal(data)
+}
+
+// canonicalView is a projection of a snapshot that excludes volatile fields
+// (CreatedAt and the Digest itself). Hashing this view yields the stable
+// identity used as Snapshot.Digest.
