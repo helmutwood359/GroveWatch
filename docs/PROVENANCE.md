@@ -42,3 +42,12 @@ record:
 
 - `path` — slash-separated, relative to the root. Always uses `/` even on
   Windows so snapshots are portable across operating systems.
+- `size` — byte length.
+- `mode` — octal permission bits, e.g. `0644`.
+- `digest` — hex SHA-256 of the file contents, streamed so large files use
+  bounded memory.
+
+Symlinks, devices, and other non-regular files are skipped because their
+content is not portable. Directories are not recorded directly; they are
+implied by file paths and reconstructed by the viewer.
+
