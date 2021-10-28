@@ -81,3 +81,20 @@ body {
 
 .gw-stat-value {
   font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+.gw-stat-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gw-section {
+  margin-bottom: 2rem;
+}
+
+.gw-section-title {
