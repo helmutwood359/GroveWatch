@@ -51,3 +51,12 @@ Symlinks, devices, and other non-regular files are skipped because their
 content is not portable. Directories are not recorded directly; they are
 implied by file paths and reconstructed by the viewer.
 
+### Tools
+
+For each requested tool name, grovewatch resolves it on `PATH`. If found, it
+runs `<tool> --version` (falling back to `version` / `-version`) and extracts
+the first dotted version number. Only the discovered path and version are
+recorded — never full command output.
+
+### Environment
+
