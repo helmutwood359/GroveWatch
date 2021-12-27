@@ -26,3 +26,8 @@ const MIME = {
 };
 
 const server = createServer(async (req, res) => {
+  try {
+    const url = new URL(req.url || "/", `http://${req.headers.host}`);
+    let pathname = decodeURIComponent(url.pathname);
+    if (pathname === "/") pathname = "/viewer/public/index.html";
+
