@@ -105,3 +105,15 @@ func scanFiles(root string, ignore []string) ([]FileRecord, error) {
 		if err != nil {
 			return err
 		}
+		rel = filepath.ToSlash(rel)
+		if rel == "." {
+			return nil
+		}
+		if isIgnored(rel, ignore) {
+			if d.IsDir() {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+		if d.IsDir() {
+			return nil
