@@ -117,3 +117,15 @@ func scanFiles(root string, ignore []string) ([]FileRecord, error) {
 		}
 		if d.IsDir() {
 			return nil
+		}
+		fi, err := d.Info()
+		if err != nil {
+			return err
+		}
+		if !fi.Mode().IsRegular() {
+			// Skip symlinks, sockets, devices: their content is not portable.
+			return nil
+		}
+		digest, err := hashFile(path)
+		if err != nil {
+			return err
