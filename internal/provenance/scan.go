@@ -129,3 +129,15 @@ func scanFiles(root string, ignore []string) ([]FileRecord, error) {
 		digest, err := hashFile(path)
 		if err != nil {
 			return err
+		}
+		records = append(records, FileRecord{
+			Path:   rel,
+			Size:   fi.Size(),
+			Mode:   fmt.Sprintf("%#o", fi.Mode().Perm()),
+			Digest: digest,
+		})
+		return nil
+	})
+	if err != nil {
+		return nil, fmt.Errorf("scan files: %w", err)
+	}
