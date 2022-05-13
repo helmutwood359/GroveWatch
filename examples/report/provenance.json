@@ -26,3 +26,7 @@
     {
       "path": "main.go",
       "size": 218,
+      "mode": "0666",
+      "digest": "2362f7c57b9e99b94d066cca4fde84c40c658553fb957a905f518c4a7ad2edc0"
+    },
+    {
