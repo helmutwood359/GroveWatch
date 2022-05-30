@@ -32,3 +32,7 @@ test("shortDigest truncates", () => {
   assert.equal(shortDigest("abc", 8), "abc");
   assert.equal(shortDigest(""), "—");
 });
+
+test("formatTimestamp handles bad input", () => {
+  assert.equal(formatTimestamp("not-a-date"), "not-a-date");
+  const out = formatTimestamp("2026-01-02T03:04:05.678Z");
