@@ -13,3 +13,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
     (files, toolchain, environment) as JSON, with per-file SHA-256 digests,
     a Merkle root over all files, and a canonical snapshot digest.
   - `diff` — compare two snapshots and explain drift per input category,
+    exiting non-zero when drift is present (CI-gate friendly).
+  - `verify` — recompute a snapshot's canonical digest and detect tampering.
