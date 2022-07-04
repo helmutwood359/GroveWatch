@@ -15,3 +15,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   - `diff` — compare two snapshots and explain drift per input category,
     exiting non-zero when drift is present (CI-gate friendly).
   - `verify` — recompute a snapshot's canonical digest and detect tampering.
+  - `version` — print the tool version.
+- Deterministic serialization: identical inputs yield an identical canonical
