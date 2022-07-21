@@ -258,3 +258,41 @@ A snapshot is a single JSON object. Abridged from the bundled sample:
 
 Paths are normalised to forward slashes even on Windows, so a snapshot from one
 OS is comparable to one from another.
+
+---
+
+## Reading a drift report
+
+Every text-mode change line has one shape — `[<category>/<kind>] <name>: <detail>`
+— where **category** is `file`/`tool`/`env`, **kind** is `added` (new only),
+`removed` (old only), or `modified` (in both, content differs), and **detail** is
+a human sentence (byte-size deltas for files, `version changed …` for tools,
+`value changed …` for env).
+
+A **file** counts as modified when its content digest differs (or, same content,
+its octal mode differs); a **tool** when its version differs, availability flips,
+or resolved path differs; an **env** var when its value's SHA-256 differs or the
+`set` flag flips. For machines, `grovewatch diff -json` emits the same data as a
+structured object (`old_digest`, `new_digest`, `identical`, `changes[]`), still
+exiting `3` on drift.
+
+---
+
+## The viewer
+
+The viewer is plain TypeScript compiled to ES modules — **no framework, no
+bundler, no runtime dependency.** It resolves its report in order: (1) a
+`?report=<url>` query parameter; (2) an inline
+`<script id="gw-report" type="application/json">` block (how it works straight
+from `file://`, no server needed); (3) otherwise `./provenance.json` relative to
+the page.
+
+It then renders summary stat cards, a nested **file tree** with directory size
+roll-ups, a **toolchain** table, and an **environment** table. Every
+user-controlled string is written through `textContent` — **never** `innerHTML`
+— so a hostile snapshot cannot inject markup. The pure logic (byte formatting,
+digest truncation, timestamp handling, tree building) lives in
+`viewer/src/format.ts` and is unit-tested with Node's built-in `node:test`.
+
+```sh
+make viewer-build         # compile viewer/src → viewer/dist
