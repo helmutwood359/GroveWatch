@@ -60,3 +60,12 @@ recorded — never full command output.
 
 ### Environment
 
+For each requested variable, grovewatch records whether it is `set` and, if so,
+the SHA-256 of its value. The raw value is never persisted, so a snapshot can be
+shared without leaking tokens or credentials while still detecting when a value
+changes.
+
+## Digest algorithm
+
+### Per-file digest
+
