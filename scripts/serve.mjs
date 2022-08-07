@@ -31,3 +31,8 @@ const server = createServer(async (req, res) => {
     let pathname = decodeURIComponent(url.pathname);
     if (pathname === "/") pathname = "/viewer/public/index.html";
 
+    // Prevent path traversal: resolve within ROOT only.
+    const filePath = normalize(join(ROOT, pathname));
+    if (!filePath.startsWith(ROOT)) {
+      res.writeHead(403).end("Forbidden");
+      return;
