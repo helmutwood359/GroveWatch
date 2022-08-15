@@ -103,3 +103,15 @@ func TestMarshalRoundTrip(t *testing.T) {
 		[]ToolRecord{{Name: "go", Found: true, Version: "1.24"}},
 		[]EnvRecord{{Key: "CI", Set: true, ValueDigest: "x1"}},
 	)
+	data, err := Marshal(snap)
+	if err != nil {
+		t.Fatalf("marshal: %v", err)
+	}
+	got, err := Unmarshal(data)
+	if err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
+	if !Verify(got) {
+		t.Fatal("round-tripped snapshot failed verification")
+	}
+	if got.Digest != snap.Digest {
