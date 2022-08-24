@@ -31,3 +31,7 @@ async function fetchReport(url: string): Promise<Snapshot> {
   }
   return (await res.json()) as Snapshot;
 }
+
+/** Resolves and loads the snapshot from the configured source. */
+export async function loadSnapshot(): Promise<Snapshot> {
+  const inline = readInlineReport();
