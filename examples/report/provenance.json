@@ -35,3 +35,8 @@
       "mode": "0666",
       "digest": "3dab4346e0c8c0be164a7316a23fc84aa8eafc669610081ae1697093934bcce7"
     }
+  ],
+  "tools": [
+    {
+      "name": "git",
+      "path": "C:/Program Files/Git/cmd/git.exe",
