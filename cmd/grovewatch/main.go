@@ -70,3 +70,18 @@ Usage:
 
 Scan flags:
   -out string      Write snapshot to file instead of stdout
+  -ignore string   Comma-separated path segments to skip
+                   (default ".git,node_modules,dist,build,.grovewatch")
+  -tools string    Comma-separated tool names to probe on PATH
+                   (default "go,node,python,git")
+  -env string      Comma-separated environment variables to record
+                   (default "CI,GOOS,GOARCH,NODE_ENV")
+`)
+}
+
+// runScan implements the "scan" subcommand.
+func runScan(args []string) error {
+	fs := flag.NewFlagSet("scan", flag.ContinueOnError)
+	out := fs.String("out", "", "write snapshot to file instead of stdout")
+	ignore := fs.String("ignore", ".git,node_modules,dist,build,.grovewatch", "comma-separated path segments to skip")
+	tools := fs.String("tools", "go,node,python,git", "comma-separated tool names to probe")
