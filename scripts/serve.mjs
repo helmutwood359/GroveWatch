@@ -36,3 +36,7 @@ const server = createServer(async (req, res) => {
     if (!filePath.startsWith(ROOT)) {
       res.writeHead(403).end("Forbidden");
       return;
+    }
+
+    const info = await stat(filePath);
+    if (info.isDirectory()) {
