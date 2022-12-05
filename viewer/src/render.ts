@@ -106,3 +106,11 @@ function renderTreeNode(node: TreeNode): HTMLElement {
     li.append(sub);
   }
   return li;
+}
+
+function renderTools(snap: Snapshot): HTMLElement {
+  const table = el("table", "gw-table");
+  const head = el("tr");
+  for (const h of ["Tool", "Status", "Version", "Path"]) {
+    head.append(el("th", undefined, h));
+  }
