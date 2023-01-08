@@ -296,3 +296,40 @@ digest truncation, timestamp handling, tree building) lives in
 
 ```sh
 make viewer-build         # compile viewer/src → viewer/dist
+node scripts/serve.mjs    # tiny stdlib static server on :8080
+# then open http://localhost:8080/viewer/public/index.html
+```
+
+The shipped `viewer/public/index.html` also opens straight from disk — it carries
+an inline copy of the sample report.
+
+---
+
+## Use cases
+
+- **Reproducible-build gate** — baseline a known-good environment; fail CI when
+  inputs drift (exit `3`).
+- **Supply-chain audit** — keep signed-off snapshots of what an artifact was
+  built from, and diff releases to explain which inputs moved.
+- **Toolchain drift detection** — catch a runner silently upgrading `go` or
+  `node` under you.
+- **Config integrity** — detect an unexpected edit or removal of a config file
+  without diffing whole trees by hand.
+- **Tamper alarm** — ship the snapshot with a release so anyone can `verify` the
+  record was not altered.
+
+---
+
+## Recipes
+
+**Fail a pipeline on any input drift** — `diff` exits `3` on drift, so CI fails:
+
+```sh
+grovewatch scan -out current.json .
+grovewatch diff baseline.json current.json
+```
+
+**Track a specific toolchain and secret set** — secrets are stored only as
+`set` + a value hash, never verbatim:
+
+```sh
