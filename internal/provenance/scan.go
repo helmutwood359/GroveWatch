@@ -141,3 +141,15 @@ func scanFiles(root string, ignore []string) ([]FileRecord, error) {
 	if err != nil {
 		return nil, fmt.Errorf("scan files: %w", err)
 	}
+
+	sort.Slice(records, func(i, j int) bool { return records[i].Path < records[j].Path })
+	return records, nil
+}
+
+// isIgnored reports whether rel matches any ignore fragment on a path segment
+// boundary.
+func isIgnored(rel string, ignore []string) bool {
+	segments := strings.Split(rel, "/")
+	for _, frag := range ignore {
+		if frag == "" {
+			continue
