@@ -40,3 +40,7 @@
     {
       "name": "git",
       "path": "C:/Program Files/Git/cmd/git.exe",
+      "version": "2.47.1",
+      "found": true
+    },
+    {
