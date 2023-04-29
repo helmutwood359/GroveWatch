@@ -38,3 +38,6 @@ func merkleRoot(files []FileRecord) string {
 	copy(sorted, files)
 	sort.Slice(sorted, func(i, j int) bool { return sorted[i].Path < sorted[j].Path })
 
+	h := sha256.New()
+	for _, f := range sorted {
+		// Length-prefixed fields prevent ambiguity between adjacent values.
