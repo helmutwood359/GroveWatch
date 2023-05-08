@@ -33,3 +33,6 @@ vet: ## Run go vet
 
 fmt: ## Format Go sources
 	gofmt -w $(shell git ls-files '*.go' 2>/dev/null || echo .)
+
+## ---- Provenance data ----
+
