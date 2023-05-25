@@ -163,3 +163,20 @@ func diffTools(oldTools, newTools []ToolRecord) []Change {
 		if _, ok := newByName[ot.Name]; !ok {
 			changes = append(changes, Change{
 				Category: ToolCategory, Kind: Removed, Name: ot.Name,
+				Detail: "tool no longer tracked",
+			})
+		}
+	}
+	sortChanges(changes)
+	return changes
+}
+
+func diffEnv(oldEnv, newEnv []EnvRecord) []Change {
+	oldByKey := make(map[string]EnvRecord, len(oldEnv))
+	for _, e := range oldEnv {
+		oldByKey[e.Key] = e
+	}
+	newByKey := make(map[string]EnvRecord, len(newEnv))
+	for _, e := range newEnv {
+		newByKey[e.Key] = e
+	}
