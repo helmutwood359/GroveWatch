@@ -333,3 +333,40 @@ grovewatch diff baseline.json current.json
 `set` + a value hash, never verbatim:
 
 ```sh
+grovewatch scan -tools go,node,rustc,docker \
+  -env CI,NODE_ENV,DATABASE_URL,AWS_REGION -out snap.json .
+```
+
+Also: **ignore generated dirs** with `-ignore .git,node_modules,dist,build,target,coverage`;
+**refresh & re-verify** the sample with `make report` then `make verify`;
+**machine-readable drift** via `grovewatch diff -json baseline.json current.json > drift.json`.
+
+---
+
+## Trust boundary & threat model
+
+grovewatch is honest about what its guarantees mean.
+
+- **The digest proves the *snapshot* is intact, not the *world*.** `verify`
+  detects edits to the JSON after it was written; it cannot tell that the
+  workspace was already compromised at scan time — garbage in, sealed garbage out.
+- **Env values are hashed, not encrypted.** A value's SHA-256 detects change and
+  confirms equality without revealing the secret, but it does not hide *which
+  keys* you track and a guessed value can be confirmed. Change-detector, not vault.
+- **Tools are trusted to report their own version.** grovewatch records whatever
+  `<tool> --version` prints; a malicious binary on `PATH` can lie.
+- **No network, no execution beyond version probes**, no telemetry — nothing
+  leaves the host.
+- **Integrity, not authenticity.** The digest is not a signature; to prove *who*
+  produced a snapshot, sign the file with your own key on top of grovewatch.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely cause & fix |
+|---------|--------------------|
+| `verify` prints `MISMATCH` | JSON edited after scanning, or an incompatible schema major. Re-scan to regenerate. |
+| Tool shows `found: false` | Not on the `PATH` grovewatch inherited. Check the shell/CI env, or drop it from `-tools`. |
+| `version` empty but `found: true` | The binary prints no dotted version to `--version`/`version`/`-version`. Path is still recorded. |
+| Digest differs across machines for "identical" inputs | Something in the roots really differs — often file **mode** bits or a tool version. Run `diff` to see. |
