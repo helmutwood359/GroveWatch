@@ -41,3 +41,6 @@ func merkleRoot(files []FileRecord) string {
 	h := sha256.New()
 	for _, f := range sorted {
 		// Length-prefixed fields prevent ambiguity between adjacent values.
+		writeField(h, f.Path)
+		writeField(h, f.Digest)
+	}
