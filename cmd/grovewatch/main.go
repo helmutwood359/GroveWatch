@@ -99,3 +99,18 @@ func runScan(args []string) error {
 		Ignore:      splitList(*ignore),
 		Tools:       splitList(*tools),
 		EnvKeys:     splitList(*env),
+	})
+	if err != nil {
+		return err
+	}
+
+	data, err := provenance.Marshal(snap)
+	if err != nil {
+		return err
+	}
+	if *out == "" {
+		_, err = os.Stdout.Write(data)
+		return err
+	}
+	if err := os.WriteFile(*out, data, 0o644); err != nil {
+		return fmt.Errorf("write %s: %w", *out, err)
