@@ -56,3 +56,8 @@ type WorkspaceInfo struct {
 }
 
 // FileRecord is the provenance of a single file input.
+type FileRecord struct {
+	// Path is the slash-separated path relative to the workspace root.
+	Path string `json:"path"`
+	// Size is the file size in bytes.
+	Size int64 `json:"size"`
