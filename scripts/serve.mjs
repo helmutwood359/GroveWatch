@@ -45,3 +45,8 @@ const server = createServer(async (req, res) => {
     }
 
     const body = await readFile(filePath);
+    const type = MIME[extname(filePath).toLowerCase()] || "application/octet-stream";
+    res.writeHead(200, { "content-type": type }).end(body);
+  } catch (err) {
+    if (err && err.code === "ENOENT") {
+      res.writeHead(404).end("Not found");
