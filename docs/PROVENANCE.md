@@ -69,3 +69,12 @@ changes.
 
 ### Per-file digest
 
+```
+file.digest = hex( SHA-256( file_contents ) )
+```
+
+### Merkle root
+
+All files are sorted by path, then folded into a single hash. Each field is
+length-prefixed (8-byte little-endian length + bytes) so that adjacent fields
+cannot be confused (`"ab"+"c"` ≠ `"a"+"bc"`):
