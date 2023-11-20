@@ -114,3 +114,17 @@ func runScan(args []string) error {
 	}
 	if err := os.WriteFile(*out, data, 0o644); err != nil {
 		return fmt.Errorf("write %s: %w", *out, err)
+	}
+	fmt.Fprintf(os.Stderr, "wrote %s (%d files, digest %s)\n", *out, snap.Workspace.FileCount, snap.Digest[:12])
+	return nil
+}
+
+// runDiff implements the "diff" subcommand.
+func runDiff(args []string) error {
+	fs := flag.NewFlagSet("diff", flag.ContinueOnError)
+	asJSON := fs.Bool("json", false, "emit the diff as JSON instead of text")
+	if err := fs.Parse(args); err != nil {
+		return err
+	}
+	if fs.NArg() != 2 {
+		return fmt.Errorf("diff requires <old.json> <new.json>")
