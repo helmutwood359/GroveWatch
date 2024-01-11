@@ -72,3 +72,10 @@ func TestScanDeterministicDigest(t *testing.T) {
 	if err != nil {
 		t.Fatalf("scan a: %v", err)
 	}
+	b, err := Scan(cfg)
+	if err != nil {
+		t.Fatalf("scan b: %v", err)
+	}
+	if a.Digest != b.Digest {
+		t.Fatalf("digest not stable: %s != %s", a.Digest, b.Digest)
+	}
