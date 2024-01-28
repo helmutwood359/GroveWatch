@@ -23,3 +23,6 @@ jobs:
         run: go build -ldflags "-X main.version=ci" -o bin/grovewatch ./cmd/grovewatch
       - name: Verify sample report integrity
         run: ./bin/grovewatch verify examples/report/provenance.json
+
+  viewer:
+    name: Viewer (typecheck, test)
