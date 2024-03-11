@@ -50,3 +50,8 @@ const server = createServer(async (req, res) => {
   } catch (err) {
     if (err && err.code === "ENOENT") {
       res.writeHead(404).end("Not found");
+    } else {
+      res.writeHead(500).end("Internal error");
+    }
+  }
+});
