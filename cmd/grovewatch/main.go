@@ -128,3 +128,18 @@ func runDiff(args []string) error {
 	}
 	if fs.NArg() != 2 {
 		return fmt.Errorf("diff requires <old.json> <new.json>")
+	}
+
+	oldSnap, err := loadSnapshot(fs.Arg(0))
+	if err != nil {
+		return err
+	}
+	newSnap, err := loadSnapshot(fs.Arg(1))
+	if err != nil {
+		return err
+	}
+
+	d := provenance.Compare(oldSnap, newSnap)
+	if *asJSON {
+		enc := json.NewEncoder(os.Stdout)
+		enc.SetIndent("", "  ")
