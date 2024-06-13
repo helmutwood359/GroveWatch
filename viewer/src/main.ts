@@ -35,3 +35,6 @@ async function fetchReport(url: string): Promise<Snapshot> {
 /** Resolves and loads the snapshot from the configured source. */
 export async function loadSnapshot(): Promise<Snapshot> {
   const inline = readInlineReport();
+  if (inline) return inline;
+
+  const params = new URLSearchParams(window.location.search);
