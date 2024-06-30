@@ -153,3 +153,15 @@ func isIgnored(rel string, ignore []string) bool {
 	for _, frag := range ignore {
 		if frag == "" {
 			continue
+		}
+		for _, seg := range segments {
+			if seg == frag {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// scanTools probes each named tool on PATH and records its resolved path and
+// reported version. Results are sorted by name.
