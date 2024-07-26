@@ -26,3 +26,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   inline report block.
 - Sample mixed-language workspace and a curated, verified sample report.
 - Documentation: `README.md` with Mermaid diagrams and a demo, and
+  `docs/PROVENANCE.md` describing the model and digest algorithm.
+- Tooling: `Makefile`, GitHub Actions CI (Go + viewer), `LICENSE` (MIT),
