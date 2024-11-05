@@ -55,3 +55,8 @@ const server = createServer(async (req, res) => {
     }
   }
 });
+
+server.listen(PORT, () => {
+  console.log(`grovewatch viewer server on http://localhost:${PORT}/`);
+  console.log(`open http://localhost:${PORT}/viewer/public/index.html`);
+});
