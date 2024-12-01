@@ -42,3 +42,7 @@ export async function loadSnapshot(): Promise<Snapshot> {
   return fetchReport(url);
 }
 
+/** Boots the viewer against the given mount element. */
+export async function boot(mount: HTMLElement): Promise<void> {
+  try {
+    const snap = await loadSnapshot();
