@@ -31,3 +31,7 @@ export interface ToolRecord {
 }
 
 export interface EnvRecord {
+  key: string;
+  value_digest: string;
+  set: boolean;
+}
