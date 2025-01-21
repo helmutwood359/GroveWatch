@@ -123,3 +123,11 @@ function renderTools(snap: Snapshot): HTMLElement {
     const status = el("td");
     status.append(
       el("span", t.found ? "gw-badge gw-ok" : "gw-badge gw-miss", t.found ? "found" : "missing"),
+    );
+    row.append(status);
+    row.append(el("td", "gw-mono", t.version || "—"));
+    row.append(el("td", "gw-path", t.path || "—"));
+    body.append(row);
+  }
+  table.append(body);
+  return table;
