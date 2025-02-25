@@ -26,3 +26,7 @@ jobs:
 
   viewer:
     name: Viewer (typecheck, test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: viewer
