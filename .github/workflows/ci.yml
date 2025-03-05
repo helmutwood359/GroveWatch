@@ -30,3 +30,6 @@ jobs:
     defaults:
       run:
         working-directory: viewer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
