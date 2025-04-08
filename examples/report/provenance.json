@@ -54,3 +54,7 @@
       "path": "C:/Program Files/nodejs/node.exe",
       "version": "24.19.0",
       "found": true
+    },
+    {
+      "name": "python",
+      "path": "C:/Users/ASHISH/AppData/Local/Programs/Python/Python311/python.exe",
