@@ -50,3 +50,10 @@ type canonicalView struct {
 	Tools       []ToolRecord  `json:"tools"`
 	Environment []EnvRecord   `json:"environment"`
 }
+
+// ComputeDigest returns the canonical SHA-256 identity of a snapshot. It is
+// stable across runs with identical inputs because it excludes CreatedAt and
+// the previously computed Digest.
+func ComputeDigest(snap *Snapshot) string {
+	view := canonicalView{
+		Schema:      snap.Schema,
