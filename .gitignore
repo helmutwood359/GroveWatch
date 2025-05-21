@@ -12,3 +12,4 @@
 /viewer/node_modules/
 
 # Editors / OS
+.DS_Store
