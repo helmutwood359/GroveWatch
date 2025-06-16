@@ -49,3 +49,7 @@ test("buildTree nests paths and sorts dirs first", () => {
   // Directory ("src") should sort before file ("README.md").
   assert.equal(tree.children[0].name, "src");
   assert.equal(tree.children[0].isDir, true);
+  assert.equal(tree.children[1].name, "README.md");
+
+  // Directory size rolls up its descendants (100 + 25 = 125).
+  assert.equal(tree.children[0].size, 125);
