@@ -51,3 +51,6 @@ func merkleRoot(files []FileRecord) string {
 // concatenations such as ("ab","c") and ("a","bc").
 func writeField(h io.Writer, s string) {
 	var lenBuf [8]byte
+	n := uint64(len(s))
+	for i := 0; i < 8; i++ {
+		lenBuf[i] = byte(n >> (8 * i))
