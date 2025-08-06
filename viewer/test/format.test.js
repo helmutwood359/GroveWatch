@@ -53,3 +53,7 @@ test("buildTree nests paths and sorts dirs first", () => {
 
   // Directory size rolls up its descendants (100 + 25 = 125).
   assert.equal(tree.children[0].size, 125);
+
+  // Nested directory is synthesized.
+  const src = tree.children[0];
+  const util = src.children.find((c) => c.name === "util");
