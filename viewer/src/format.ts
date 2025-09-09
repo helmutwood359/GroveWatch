@@ -70,3 +70,13 @@ export function buildTree(files: FileRecord[]): TreeNode {
     }
   }
 
+  sortTree(root);
+  computeDirSizes(root);
+  return root;
+}
+
+function sortTree(node: TreeNode): void {
+  node.children.sort((a, b) => {
+    if (a.isDir !== b.isDir) return a.isDir ? -1 : 1;
+    return a.name.localeCompare(b.name);
+  });
