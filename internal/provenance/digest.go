@@ -54,3 +54,7 @@ func writeField(h io.Writer, s string) {
 	n := uint64(len(s))
 	for i := 0; i < 8; i++ {
 		lenBuf[i] = byte(n >> (8 * i))
+	}
+	_, _ = h.Write(lenBuf[:])
+	_, _ = io.WriteString(h, s)
+}
