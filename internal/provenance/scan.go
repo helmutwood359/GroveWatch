@@ -177,3 +177,15 @@ func scanTools(names []string) []ToolRecord {
 		}
 		records = append(records, rec)
 	}
+	sort.Slice(records, func(i, j int) bool { return records[i].Name < records[j].Name })
+	return records
+}
+
+// probeVersion runs "<tool> --version" (falling back to "version") and returns
+// the first dotted version number found, or "" if none.
+func probeVersion(name string) string {
+	for _, args := range [][]string{{"--version"}, {"version"}, {"-version"}} {
+		cmd := exec.Command(name, args...)
+		out, err := cmd.CombinedOutput()
+		if err != nil {
+			continue
