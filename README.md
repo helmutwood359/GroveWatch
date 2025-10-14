@@ -370,3 +370,40 @@ grovewatch is honest about what its guarantees mean.
 | Tool shows `found: false` | Not on the `PATH` grovewatch inherited. Check the shell/CI env, or drop it from `-tools`. |
 | `version` empty but `found: true` | The binary prints no dotted version to `--version`/`version`/`-version`. Path is still recorded. |
 | Digest differs across machines for "identical" inputs | Something in the roots really differs — often file **mode** bits or a tool version. Run `diff` to see. |
+| `diff` exits non-zero in CI | By design: exit `3` means drift was found — a gate signal, not a crash. |
+| Viewer shows "Failed to load report" | Could not resolve a report from `?report=`, the inline block, or `./provenance.json`. Serve the folder or use the inline build. |
+
+---
+
+## Repository layout
+
+```
+grovewatch/
+├─ cmd/grovewatch/main.go     CLI entry point & subcommands
+├─ internal/provenance/       core library (stdlib only)
+│  ├─ model.go                snapshot data model + schema version
+│  ├─ scan.go                 workspace / tool / env scanner
+│  ├─ digest.go               SHA-256 helpers + Merkle root
+│  ├─ serialize.go            deterministic JSON, ComputeDigest, Verify
+│  ├─ diff.go                 drift comparison engine + Summary()
+│  └─ *_test.go               focused tests
+├─ viewer/                    zero-dep TypeScript viewer (src · test · public)
+├─ examples/                  sample-workspace/ + report/provenance.json
+├─ docs/                      PROVENANCE.md spec + assets/ (this guide's SVGs)
+├─ scripts/serve.mjs          tiny stdlib static server
+└─ Makefile · .github/workflows/ci.yml · LICENSE · CHANGELOG.md
+```
+
+---
+
+## Testing
+
+```sh
+make test          # Go tests: scan determinism, diff classification, verify
+make viewer-test   # viewer tests: byte formatting, digest truncation, tree build
+make ci            # vet + Go tests + viewer build/test + verify sample
+```
+
+The Go tests assert that identical inputs yield an identical digest, that the
+digest is independent of capture time, that drift is classified into the right
+category and kind, and that tampering is detected. The viewer tests cover byte
