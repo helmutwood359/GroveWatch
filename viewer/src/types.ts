@@ -35,3 +35,7 @@ export interface EnvRecord {
   value_digest: string;
   set: boolean;
 }
+
+export interface Snapshot {
+  schema: string;
+  tool: ToolInfo;
