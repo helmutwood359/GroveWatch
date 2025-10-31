@@ -63,3 +63,8 @@
     }
   ],
   "environment": [
+    {
+      "key": "CI",
+      "value_digest": "",
+      "set": false
+    },
