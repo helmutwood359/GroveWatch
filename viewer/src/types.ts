@@ -39,3 +39,7 @@ export interface EnvRecord {
 export interface Snapshot {
   schema: string;
   tool: ToolInfo;
+  workspace: WorkspaceInfo;
+  files: FileRecord[];
+  tools: ToolRecord[];
+  environment: EnvRecord[];
