@@ -157,3 +157,18 @@ func runDiff(args []string) error {
 func runVerify(args []string) error {
 	fs := flag.NewFlagSet("verify", flag.ContinueOnError)
 	if err := fs.Parse(args); err != nil {
+		return err
+	}
+	if fs.NArg() != 1 {
+		return fmt.Errorf("verify requires <snapshot.json>")
+	}
+	snap, err := loadSnapshot(fs.Arg(0))
+	if err != nil {
+		return err
+	}
+	if provenance.Verify(snap) {
+		fmt.Printf("OK: digest %s matches content\n", snap.Digest[:12])
+		return nil
+	}
+	recomputed := provenance.ComputeDigest(snap)
+	fmt.Fprintf(os.Stderr, "MISMATCH: stored %s but content hashes to %s\n", snap.Digest[:12], recomputed[:12])
