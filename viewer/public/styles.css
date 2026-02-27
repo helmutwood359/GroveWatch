@@ -199,3 +199,20 @@ body {
   color: var(--ok);
 }
 
+.gw-miss {
+  background: rgba(248, 81, 73, 0.15);
+  color: var(--miss);
+}
+
+.gw-empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.gw-error {
+  background: rgba(248, 81, 73, 0.12);
+  border: 1px solid var(--miss);
+  color: var(--fg);
+  padding: 1rem;
+  border-radius: 8px;
+}
