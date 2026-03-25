@@ -68,3 +68,7 @@
       "value_digest": "",
       "set": false
     },
+    {
+      "key": "GOARCH",
+      "value_digest": "",
+      "set": false
