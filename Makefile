@@ -54,3 +54,6 @@ viewer-build: ## Compile the TypeScript viewer to viewer/dist
 	cd viewer && npx tsc -p tsconfig.json
 
 viewer-typecheck: ## Type-check the viewer without emitting
+	cd viewer && npx tsc -p tsconfig.json --noEmit
+
+viewer-test: viewer-build ## Run viewer unit tests (node:test)
