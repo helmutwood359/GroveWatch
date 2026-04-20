@@ -57,3 +57,7 @@ viewer-typecheck: ## Type-check the viewer without emitting
 	cd viewer && npx tsc -p tsconfig.json --noEmit
 
 viewer-test: viewer-build ## Run viewer unit tests (node:test)
+	cd viewer && node --test
+
+## ---- Aggregate ----
+
