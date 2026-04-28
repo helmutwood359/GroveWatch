@@ -172,3 +172,17 @@ func runVerify(args []string) error {
 	}
 	recomputed := provenance.ComputeDigest(snap)
 	fmt.Fprintf(os.Stderr, "MISMATCH: stored %s but content hashes to %s\n", snap.Digest[:12], recomputed[:12])
+	os.Exit(4)
+	return nil
+}
+
+// loadSnapshot reads and parses a snapshot file.
+func loadSnapshot(path string) (*provenance.Snapshot, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, fmt.Errorf("open %s: %w", path, err)
+	}
+	defer f.Close()
+	snap, err := provenance.Read(f)
+	if err != nil {
+		return nil, fmt.Errorf("parse %s: %w", path, err)
