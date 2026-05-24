@@ -189,3 +189,15 @@ func probeVersion(name string) string {
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			continue
+		}
+		if m := versionRe.Find(out); m != nil {
+			return string(m)
+		}
+	}
+	return ""
+}
+
+// scanEnv records the presence and value hash of each named environment
+// variable. Values are hashed to avoid persisting secrets. Results are sorted
+// by key.
+func scanEnv(keys []string) []EnvRecord {
