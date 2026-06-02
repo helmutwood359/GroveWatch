@@ -61,3 +61,8 @@ type FileRecord struct {
 	Path string `json:"path"`
 	// Size is the file size in bytes.
 	Size int64 `json:"size"`
+	// Mode is the octal file mode string (e.g. "0644").
+	Mode string `json:"mode"`
+	// Digest is the SHA-256 of the file contents, hex-encoded.
+	Digest string `json:"digest"`
+}
