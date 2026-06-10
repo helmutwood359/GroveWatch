@@ -105,3 +105,12 @@ key) and Go's `encoding/json` emits struct fields in declaration order, the
 serialized `view` is byte-stable. Consequently the same inputs always yield the
 same `digest`, even across machines and across time.
 
+`grovewatch verify` recomputes this value and compares it to the stored
+`digest`; a mismatch means the file was edited or produced by an incompatible
+version.
+
+## Diff semantics
+
+`grovewatch diff old.json new.json` compares the two snapshots and emits, per
+category (file → tool → env), a stable, name-sorted list of changes:
+
