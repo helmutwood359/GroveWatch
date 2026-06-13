@@ -6,3 +6,4 @@ in the demo and tests.
 
 Regenerate the bundled report with:
 
+```sh
