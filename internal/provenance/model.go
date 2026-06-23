@@ -66,3 +66,8 @@ type FileRecord struct {
 	// Digest is the SHA-256 of the file contents, hex-encoded.
 	Digest string `json:"digest"`
 }
+
+// ToolRecord is the provenance of an external toolchain input, e.g. a compiler
+// or interpreter discovered on PATH.
+type ToolRecord struct {
+	// Name is the logical tool name (e.g. "go", "node").
