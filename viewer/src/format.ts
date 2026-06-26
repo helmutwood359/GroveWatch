@@ -80,3 +80,13 @@ function sortTree(node: TreeNode): void {
     if (a.isDir !== b.isDir) return a.isDir ? -1 : 1;
     return a.name.localeCompare(b.name);
   });
+  for (const child of node.children) sortTree(child);
+}
+
+/** Rolls up leaf sizes into directory nodes and returns the node's total. */
+function computeDirSizes(node: TreeNode): number {
+  if (!node.isDir) return node.size;
+  let total = 0;
+  for (const child of node.children) total += computeDirSizes(child);
+  node.size = total;
+  return total;
