@@ -43,3 +43,7 @@ export interface Snapshot {
   files: FileRecord[];
   tools: ToolRecord[];
   environment: EnvRecord[];
+  digest: string;
+  created_at: string;
+}
+
