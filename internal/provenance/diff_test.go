@@ -115,3 +115,15 @@ func TestMarshalRoundTrip(t *testing.T) {
 		t.Fatal("round-tripped snapshot failed verification")
 	}
 	if got.Digest != snap.Digest {
+		t.Fatalf("digest changed on round trip: %s != %s", got.Digest, snap.Digest)
+	}
+}
+
+func TestVerifyDetectsTampering(t *testing.T) {
+	snap := mkSnap([]FileRecord{{Path: "a.txt", Size: 1, Mode: "0644", Digest: "aa"}}, nil, nil)
+	// Tamper with content after digest was computed.
+	snap.Files[0].Digest = "bb"
+	if Verify(snap) {
+		t.Fatal("verify should fail after tampering")
+	}
+}
