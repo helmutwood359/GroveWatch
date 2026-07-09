@@ -139,3 +139,12 @@ function renderEnv(snap: Snapshot): HTMLElement {
   for (const h of ["Variable", "Status", "Value digest"]) {
     head.append(el("th", undefined, h));
   }
+  table.append(el("thead").appendChild(head).parentElement!);
+
+  const body = el("tbody");
+  for (const e of snap.environment) {
+    const row = el("tr");
+    row.append(el("td", "gw-mono", e.key));
+    const status = el("td");
+    status.append(
+      el("span", e.set ? "gw-badge gw-ok" : "gw-badge gw-miss", e.set ? "set" : "unset"),
