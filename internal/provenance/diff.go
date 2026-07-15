@@ -229,3 +229,20 @@ func sortChanges(c []Change) {
 		}
 		return c[i].Kind < c[j].Kind
 	})
+}
+
+// short returns the first 12 characters of a hex digest for compact display.
+func short(digest string) string {
+	if len(digest) <= 12 {
+		return digest
+	}
+	return digest[:12]
+}
+
+// Summary renders a human-readable multi-line description of the diff.
+func (d *Diff) Summary() string {
+	if d.Identical {
+		return "No drift: snapshots are identical (digest " + short(d.NewDigest) + ")."
+	}
+	var b strings.Builder
+	var added, removed, modified int
