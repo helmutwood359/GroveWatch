@@ -71,3 +71,8 @@ type FileRecord struct {
 // or interpreter discovered on PATH.
 type ToolRecord struct {
 	// Name is the logical tool name (e.g. "go", "node").
+	Name string `json:"name"`
+	// Path is the resolved absolute path, or empty if not found.
+	Path string `json:"path"`
+	// Version is the reported version string, or empty if unavailable.
+	Version string `json:"version"`
