@@ -46,3 +46,7 @@ export async function loadSnapshot(): Promise<Snapshot> {
 export async function boot(mount: HTMLElement): Promise<void> {
   try {
     const snap = await loadSnapshot();
+    render(mount, snap);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    renderError(mount, message);
