@@ -76,3 +76,8 @@ type ToolRecord struct {
 	Path string `json:"path"`
 	// Version is the reported version string, or empty if unavailable.
 	Version string `json:"version"`
+	// Found indicates whether the tool was located on the host.
+	Found bool `json:"found"`
+}
+
+// EnvRecord is the provenance of a single environment variable input. Values
