@@ -186,3 +186,18 @@ func loadSnapshot(path string) (*provenance.Snapshot, error) {
 	snap, err := provenance.Read(f)
 	if err != nil {
 		return nil, fmt.Errorf("parse %s: %w", path, err)
+	}
+	return snap, nil
+}
+
+// splitList splits a comma-separated flag value into trimmed, non-empty parts.
+func splitList(s string) []string {
+	var out []string
+	for _, part := range strings.Split(s, ",") {
+		part = strings.TrimSpace(part)
+		if part != "" {
+			out = append(out, part)
+		}
+	}
+	return out
+}
