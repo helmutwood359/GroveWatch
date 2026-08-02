@@ -81,3 +81,8 @@ type ToolRecord struct {
 }
 
 // EnvRecord is the provenance of a single environment variable input. Values
+// are hashed rather than stored verbatim to avoid leaking secrets while still
+// detecting change.
+type EnvRecord struct {
+	// Key is the environment variable name.
+	Key string `json:"key"`
