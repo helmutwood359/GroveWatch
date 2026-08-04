@@ -62,3 +62,7 @@ test("buildTree nests paths and sorts dirs first", () => {
 });
 
 test("countFoundTools and countSetEnv", () => {
+  const snap = {
+    tools: [
+      { name: "go", path: "/go", version: "1", found: true },
+      { name: "node", path: "", version: "", found: false },
