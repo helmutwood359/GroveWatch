@@ -7,3 +7,4 @@ in the demo and tests.
 Regenerate the bundled report with:
 
 ```sh
+grovewatch scan -out ../report/provenance.json .
