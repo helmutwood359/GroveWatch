@@ -28,3 +28,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Documentation: `README.md` with Mermaid diagrams and a demo, and
   `docs/PROVENANCE.md` describing the model and digest algorithm.
 - Tooling: `Makefile`, GitHub Actions CI (Go + viewer), `LICENSE` (MIT),
+  `.gitignore`, and focused Go and TypeScript tests.
+
+[0.1.0]: https://github.com/grovewatch/grovewatch/releases/tag/v0.1.0
