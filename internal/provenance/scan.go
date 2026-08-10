@@ -201,3 +201,15 @@ func probeVersion(name string) string {
 // variable. Values are hashed to avoid persisting secrets. Results are sorted
 // by key.
 func scanEnv(keys []string) []EnvRecord {
+	records := make([]EnvRecord, 0, len(keys))
+	for _, key := range keys {
+		val, ok := os.LookupEnv(key)
+		rec := EnvRecord{Key: key, Set: ok}
+		if ok {
+			rec.ValueDigest = hashBytes([]byte(val))
+		}
+		records = append(records, rec)
+	}
+	sort.Slice(records, func(i, j int) bool { return records[i].Key < records[j].Key })
+	return records
+}
