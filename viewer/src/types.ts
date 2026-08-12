@@ -47,3 +47,7 @@ export interface Snapshot {
   created_at: string;
 }
 
+/** A single node in the derived file tree used for rendering. */
+export interface TreeNode {
+  name: string;
+  path: string;
