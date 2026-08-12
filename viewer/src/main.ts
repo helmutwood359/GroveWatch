@@ -50,3 +50,6 @@ export async function boot(mount: HTMLElement): Promise<void> {
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     renderError(mount, message);
+  }
+}
+
