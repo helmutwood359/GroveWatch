@@ -72,3 +72,11 @@ func ComputeDigest(snap *Snapshot) string {
 		data = []byte{}
 	}
 	return hashBytes(data)
+}
+
+// Verify recomputes the digest of snap and reports whether it matches the
+// stored Digest. A false result means the snapshot was tampered with or
+// produced by an incompatible version.
+func Verify(snap *Snapshot) bool {
+	return ComputeDigest(snap) == snap.Digest
+}
