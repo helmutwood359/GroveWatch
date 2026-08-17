@@ -36,3 +36,6 @@ jobs:
         with:
           node-version: "20"
       - name: Install TypeScript
+        run: npm install --no-save typescript@5.8
+      - name: Type-check
+        run: npx tsc -p tsconfig.json --noEmit
