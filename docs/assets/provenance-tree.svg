@@ -101,3 +101,11 @@
       <animate attributeName="opacity" values="0.35;1;0.35" dur="2.8s" repeatCount="indefinite"/>
     </circle>
     <circle cx="486" cy="120" r="6" fill="#f5c451">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="2.8s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="440" cy="176" r="6" fill="#f5c451">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="2.8s" begin="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="352" cy="188" r="6" fill="#f5c451">
+      <animate attributeName="opacity" values="0.35;1;0.35" dur="2.8s" begin="1.8s" repeatCount="indefinite"/>
+    </circle>
