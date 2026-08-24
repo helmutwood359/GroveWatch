@@ -114,3 +114,12 @@ version.
 `grovewatch diff old.json new.json` compares the two snapshots and emits, per
 category (file → tool → env), a stable, name-sorted list of changes:
 
+| Kind       | Meaning                                                      |
+|------------|--------------------------------------------------------------|
+| `added`    | present in the new snapshot only                             |
+| `removed`  | present in the old snapshot only                             |
+| `modified` | present in both but content/version/mode/value digest differ |
+
+The command exits with status `3` when any drift is present, making it directly
+usable as a CI gate:
+
