@@ -123,3 +123,12 @@ category (file → tool → env), a stable, name-sorted list of changes:
 The command exits with status `3` when any drift is present, making it directly
 usable as a CI gate:
 
+```sh
+grovewatch scan -out new.json . && grovewatch diff baseline.json new.json
+```
+
+## Compatibility
+
+- **Minor** schema bumps add optional fields; older consumers ignore them.
+- **Major** schema bumps may reorder or remove fields and will change digests;
+  consumers must gate on the `schema` major version.
