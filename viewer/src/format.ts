@@ -90,3 +90,14 @@ function computeDirSizes(node: TreeNode): number {
   for (const child of node.children) total += computeDirSizes(child);
   node.size = total;
   return total;
+}
+
+/** Counts how many probed tools were found on the host. */
+export function countFoundTools(snap: Snapshot): number {
+  return snap.tools.filter((t) => t.found).length;
+}
+
+/** Counts how many tracked environment variables were set. */
+export function countSetEnv(snap: Snapshot): number {
+  return snap.environment.filter((e) => e.set).length;
+}
