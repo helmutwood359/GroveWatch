@@ -61,3 +61,7 @@ viewer-test: viewer-build ## Run viewer unit tests (node:test)
 
 ## ---- Aggregate ----
 
+ci: vet test viewer-build viewer-test verify ## Everything CI runs
+
+clean: ## Remove build artifacts
+	rm -rf bin viewer/dist
