@@ -66,3 +66,7 @@ test("countFoundTools and countSetEnv", () => {
     tools: [
       { name: "go", path: "/go", version: "1", found: true },
       { name: "node", path: "", version: "", found: false },
+    ],
+    environment: [
+      { key: "CI", value_digest: "x", set: true },
+      { key: "NODE_ENV", value_digest: "", set: false },
