@@ -51,3 +51,8 @@ export interface Snapshot {
 export interface TreeNode {
   name: string;
   path: string;
+  isDir: boolean;
+  size: number;
+  digest?: string;
+  children: TreeNode[];
+}
