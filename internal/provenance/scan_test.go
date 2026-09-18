@@ -101,3 +101,11 @@ func TestScanDigestExcludesTimestamp(t *testing.T) {
 	}
 	if a.CreatedAt.Equal(b.CreatedAt) {
 		t.Fatalf("expected different CreatedAt values")
+	}
+}
+
+func TestScanRejectsNonDirectory(t *testing.T) {
+	if _, err := Scan(ScanConfig{Root: "", ToolVersion: "t"}); err == nil {
+		t.Fatal("expected error for empty root")
+	}
+}
