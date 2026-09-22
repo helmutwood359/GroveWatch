@@ -70,3 +70,8 @@ test("countFoundTools and countSetEnv", () => {
     environment: [
       { key: "CI", value_digest: "x", set: true },
       { key: "NODE_ENV", value_digest: "", set: false },
+    ],
+  };
+  assert.equal(countFoundTools(snap), 1);
+  assert.equal(countSetEnv(snap), 1);
+});
