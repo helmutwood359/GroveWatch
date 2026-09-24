@@ -77,3 +77,8 @@
       "key": "GOOS",
       "value_digest": "",
       "set": false
+    },
+    {
+      "key": "NODE_ENV",
+      "value_digest": "",
+      "set": false
