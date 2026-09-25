@@ -8,3 +8,4 @@ Regenerate the bundled report with:
 
 ```sh
 grovewatch scan -out ../report/provenance.json .
+```
