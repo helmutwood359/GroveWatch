@@ -148,3 +148,11 @@ function renderEnv(snap: Snapshot): HTMLElement {
     const status = el("td");
     status.append(
       el("span", e.set ? "gw-badge gw-ok" : "gw-badge gw-miss", e.set ? "set" : "unset"),
+    );
+    row.append(status);
+    const digest = el("td", "gw-mono", e.set ? shortDigest(e.value_digest) : "—");
+    if (e.set && e.value_digest) digest.title = e.value_digest;
+    row.append(digest);
+    body.append(row);
+  }
+  table.append(body);
