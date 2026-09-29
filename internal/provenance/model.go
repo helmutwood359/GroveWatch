@@ -86,3 +86,8 @@ type ToolRecord struct {
 type EnvRecord struct {
 	// Key is the environment variable name.
 	Key string `json:"key"`
+	// ValueDigest is the SHA-256 of the value, hex-encoded, or empty if unset.
+	ValueDigest string `json:"value_digest"`
+	// Set indicates whether the variable was present in the environment.
+	Set bool `json:"set"`
+}
