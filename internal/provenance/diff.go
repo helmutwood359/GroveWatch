@@ -246,3 +246,20 @@ func (d *Diff) Summary() string {
 	}
 	var b strings.Builder
 	var added, removed, modified int
+	for _, c := range d.Changes {
+		switch c.Kind {
+		case Added:
+			added++
+		case Removed:
+			removed++
+		case Modified:
+			modified++
+		}
+	}
+	fmt.Fprintf(&b, "Drift detected: %d added, %d modified, %d removed.\n", added, modified, removed)
+	fmt.Fprintf(&b, "  old %s -> new %s\n", short(d.OldDigest), short(d.NewDigest))
+	for _, c := range d.Changes {
+		fmt.Fprintf(&b, "  [%s/%s] %s: %s\n", c.Category, c.Kind, c.Name, c.Detail)
+	}
+	return b.String()
+}
