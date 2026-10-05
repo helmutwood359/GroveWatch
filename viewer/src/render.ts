@@ -156,3 +156,12 @@ function renderEnv(snap: Snapshot): HTMLElement {
     body.append(row);
   }
   table.append(body);
+  return table;
+}
+
+/** Renders an error banner into the container. */
+export function renderError(container: HTMLElement, message: string): void {
+  const banner = el("div", "gw-error");
+  banner.append(el("strong", undefined, "Failed to load report. "), el("span", undefined, message));
+  container.replaceChildren(banner);
+}
