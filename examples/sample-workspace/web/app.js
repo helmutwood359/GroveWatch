@@ -2,3 +2,4 @@
 // mixed-language tree to fingerprint.
 export function greet(name) {
   return `hello, ${name}`;
+}
